@@ -23,6 +23,7 @@
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
+    "dev": "tsc --watch",
     "build": "tsc"
   },
   "devDependencies": {
