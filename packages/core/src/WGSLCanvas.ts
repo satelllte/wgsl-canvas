@@ -23,9 +23,16 @@ export class WGSLCanvas {
 
   private _shaderFragmentNeedsUpdate = false;
   private _shaderFragment: string = WGSLCanvas.SHADER_FRAGMENT_DEFAULT;
+
+  /**
+   * Gets current fragment shader WGSL code
+   */
   public get shaderFragment(): string {
     return this._shaderFragment;
   }
+  /**
+   * Sets fragment shader WGSL code
+   */
   public set shaderFragment(value: string) {
     this._shaderFragment = value;
     this._shaderFragmentNeedsUpdate = true;
@@ -47,6 +54,10 @@ export class WGSLCanvas {
     this._format = navigator.gpu.getPreferredCanvasFormat();
   }
 
+  /**
+   * Initializes internal canvas GPU context.
+   * Must run once after the creation of "WGSLCanvas" instance.
+   */
   public async init(): Promise<void> {
     this._adapter = (await navigator.gpu.requestAdapter()) || undefined;
     if (!this._adapter) throw new Error("Failed to request WebGPU adapter");
@@ -60,10 +71,16 @@ export class WGSLCanvas {
     });
   }
 
+  /**
+   * Checks if WebGPU is supported on this browser/device.
+   */
   public static isSupported(): boolean {
     return !!navigator.gpu;
   }
 
+  /**
+   * Loads texture from URL, creates bitmap image that can be further drawn on the canvas through shader.
+   */
   public static async loadTexture(url: string): Promise<ImageBitmap> {
     const res = await fetch(url);
     const blob = await res.blob();
@@ -75,6 +92,9 @@ export class WGSLCanvas {
   private _renderPipeline: GPURenderPipeline | undefined;
   private _sampler: GPUSampler | undefined;
 
+  /**
+   * Renders shader output to the canvas.
+   */
   public render(): void {
     if (!this._device) return;
     const device = this._device;

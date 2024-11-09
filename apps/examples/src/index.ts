@@ -1,1 +1,1 @@
-console.debug("hello");
+import "./main";
