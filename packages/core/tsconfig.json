@@ -5,6 +5,9 @@
  */
 {
   "compilerOptions": {
+    /* External types: */
+    "types": ["@webgpu/types"],
+
     /* Base Options: */
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -27,10 +30,6 @@
 
     /* AND if you're building for a library: */
     "declaration": true,
-
-    /* AND if you're building for a library in a monorepo: */
-    // "composite": true,
-    // "declarationMap": true,
 
     /* If your code runs in the DOM: */
     "lib": ["es2022", "dom", "dom.iterable"]
