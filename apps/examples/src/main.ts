@@ -1,5 +1,7 @@
 import { WGSLCanvas } from "@wgsl-canvas/core";
-import shaderFragment from "./main.fragment.wgsl?raw";
+import { Example00Default } from "./examples/Example00Default";
+import { Example01Uniforms } from "./examples/Example01Uniforms";
+import { Example02Texture } from "./examples/Example02Texture";
 
 const main = async () => {
   if (!WGSLCanvas.isSupported()) {
@@ -7,26 +9,17 @@ const main = async () => {
     return;
   }
 
-  const canvas = document.createElement("canvas");
-  canvas.width = 500;
-  canvas.height = 500;
-  document.body.appendChild(canvas);
+  const container = document.getElementById("examples");
+  if (!container) return;
 
-  const wgslCanvas = new WGSLCanvas({ canvas });
-  await wgslCanvas.init();
-  wgslCanvas.shaderFragment = shaderFragment;
-  wgslCanvas.uniformsKeys = ["timeElapsed"];
-  wgslCanvas.uniforms.time = 0.0;
-
-  const frame: FrameRequestCallback = (timeElapsedMilliseconds) => {
-    const timeElapsed = timeElapsedMilliseconds * 0.001;
-    wgslCanvas.uniforms.timeElapsed = timeElapsed;
-    wgslCanvas.render();
-
-    requestAnimationFrame(frame);
-  };
-
-  requestAnimationFrame(frame);
+  const examples = [Example00Default, Example01Uniforms, Example02Texture];
+  for (const example of examples) {
+    const canvas = document.createElement("canvas");
+    canvas.width = 250;
+    canvas.height = 250;
+    container.appendChild(canvas);
+    await example(canvas);
+  }
 };
 
 void main();
