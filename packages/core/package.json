@@ -13,6 +13,7 @@
     "url": "https://github.com/satelllte/wgsl-canvas/issues"
   },
   "author": "@satelllte (https://github.com/satelllte)",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/satelllte/wgsl-canvas.git"
