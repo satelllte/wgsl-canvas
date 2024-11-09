@@ -1,4 +1,15 @@
 {
   "name": "wgsl-canvas-monorepo",
-  "private": true
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build"
+  },
+  "devDependencies": {
+    "turbo": "2.2.3"
+  },
+  "packageManager": "npm@10.9.0",
+  "workspaces": [
+    "packages/*"
+  ]
 }

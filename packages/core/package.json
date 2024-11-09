@@ -1,0 +1,7 @@
+{
+  "name": "@wgsl-canvas/core",
+  "version": "0.0.1-alpha.1",
+  "scripts": {
+    "build": "rm -rf ./dist && mkdir ./dist && echo \"console.log('hello');\" > ./dist/index.js"
+  }
+}
