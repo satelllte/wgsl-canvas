@@ -22,7 +22,7 @@ npm i --save-dev @webgpu/types
 
 Then add them into your `tsconfig.json`:
 
-```json
+```jsonc
 {
   // ...
   "compilerOptions": {
