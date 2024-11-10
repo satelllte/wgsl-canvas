@@ -140,7 +140,7 @@ which will open the dev server at http://localhost:5173 by [Vite](https://vite.d
 
 ## API
 
-Check out auto-generated docs here: [tsdocs.dev > @wgsl-canvas/core](https://tsdocs.dev/docs/@wgsl-canvas/core)
+Check out auto-generated docs here: [tsdocs.dev:@wgsl-canvas/core](https://tsdocs.dev/docs/@wgsl-canvas/core)
 
 ## Version history
 
