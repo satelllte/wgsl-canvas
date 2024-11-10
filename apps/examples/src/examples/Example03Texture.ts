@@ -1,7 +1,7 @@
 import { WGSLCanvas } from "@wgsl-canvas/core";
-import shaderFragment from "./Example02Texture.wgsl?raw";
+import shaderFragment from "./Example03Texture.wgsl?raw";
 
-export const Example02Texture = async (canvas: HTMLCanvasElement) => {
+export const Example03Texture = async (canvas: HTMLCanvasElement) => {
   const wgslCanvas = new WGSLCanvas({ canvas });
   await wgslCanvas.init();
   const textureUrl = "/assets/textures/uv_grid/uv_grid_webgpu.jpg";

@@ -63,6 +63,38 @@ If everything is set up correctly, you should see this picture (which is the def
 
 <img alt="Default fragment shader" src="./README.shader-default.png" width="250" height="250" />
 
+### Passing custom shader
+
+To pass your custom shader, define it as a string of WGSL code.
+
+```ts
+const shaderFragment = /* wgsl */`
+struct FragmentOutput {
+  @location(0) color: vec4<f32>,
+}
+
+@fragment
+fn fragment_main() -> FragmentOutput {
+  var output: FragmentOutput;
+  output.color = vec4<f32>(0.1, 0.2, 0.25, 1.0);
+  return output;
+}
+`;
+```
+
+And then pass it to `WGSLCanvas` instance via `shaderFragment` property:
+
+```ts
+wgslCanvas.shaderFragment = shaderFragment;
+```
+
+> [!TIP]
+> If you want to store your WGSL code under `.wgsl` files, you should configure your bundler to be able to resolve them as strings. The easiest way is to start with Vite, which can do this out of the box via [`?raw` suffix](https://vite.dev/guide/assets#importing-asset-as-string).
+
+See full example here:
+- [apps/examples/src/examples/Example01Color.ts](./apps/examples/src/examples/Example01Color.ts)
+- [apps/examples/src/examples/Example01Color.wgsl](./apps/examples/src/examples/Example01Color.wgsl)
+
 ### Passing uniforms
 
 To pass uniforms to your shader, you should first define them in `uniformsKeys` array in your `WGSLCanvas` instance:
@@ -95,8 +127,8 @@ struct Uniforms {
 > The order of keys in `struct Uniforms` must be the same as defined in `uniformsKeys` array!
 
 See full example here:
-- [apps/examples/src/examples/Example01Uniforms.ts](./apps/examples/src/examples/Example01Uniforms.ts)
-- [apps/examples/src/examples/Example01Uniforms.wgsl](./apps/examples/src/examples/Example01Uniforms.wgsl)
+- [apps/examples/src/examples/Example02Uniforms.ts](./apps/examples/src/examples/Example02Uniforms.ts)
+- [apps/examples/src/examples/Example02Uniforms.wgsl](./apps/examples/src/examples/Example02Uniforms.wgsl)
 
 ### Passing textures
 
@@ -126,8 +158,8 @@ In WGSL shader, it'll appear under the following vars:
 > If you have uniforms, they'll appear at `@binding(0)`, but `sampler` and `textures` will appear under their bindings incremented by 1.
 
 See full example here:
-- [apps/examples/src/examples/Example02Texture.ts](./apps/examples/src/examples/Example02Texture.ts)
-- [apps/examples/src/examples/Example02Texture.wgsl](./apps/examples/src/examples/Example02Texture.ts)
+- [apps/examples/src/examples/Example03Texture.ts](./apps/examples/src/examples/Example03Texture.ts)
+- [apps/examples/src/examples/Example03Texture.wgsl](./apps/examples/src/examples/Example03Texture.ts)
 
 ## Examples
 
