@@ -2,7 +2,7 @@ import { WGSLCanvas } from "@wgsl-canvas/core";
 import { Example00Default } from "./examples/Example00Default";
 import { Example01Color } from "./examples/Example01Color";
 import { Example02Uniforms } from "./examples/Example02Uniforms";
-import { Example02Texture } from "./examples/Example02Texture";
+import { Example03Texture } from "./examples/Example03Texture";
 
 const main = async () => {
   if (!WGSLCanvas.isSupported()) {
@@ -17,7 +17,7 @@ const main = async () => {
     Example00Default,
     Example01Color,
     Example02Uniforms,
-    Example02Texture, // TODO: rename to "Example03Texture"
+    Example03Texture,
   ];
   for (const example of examples) {
     const canvas = document.createElement("canvas");

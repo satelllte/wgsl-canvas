@@ -158,8 +158,8 @@ In WGSL shader, it'll appear under the following vars:
 > If you have uniforms, they'll appear at `@binding(0)`, but `sampler` and `textures` will appear under their bindings incremented by 1.
 
 See full example here:
-- [apps/examples/src/examples/Example02Texture.ts](./apps/examples/src/examples/Example02Texture.ts)
-- [apps/examples/src/examples/Example02Texture.wgsl](./apps/examples/src/examples/Example02Texture.ts)
+- [apps/examples/src/examples/Example03Texture.ts](./apps/examples/src/examples/Example03Texture.ts)
+- [apps/examples/src/examples/Example03Texture.wgsl](./apps/examples/src/examples/Example03Texture.ts)
 
 ## Examples
 
