@@ -137,3 +137,11 @@ npm run dev
 ```
 
 which will open the dev server at http://localhost:5173 by [Vite](https://vite.dev/).
+
+## API
+
+Check out auto-generated docs here: [tsdocs.dev:@wgsl-canvas/core](https://tsdocs.dev/docs/@wgsl-canvas/core)
+
+## Version history
+
+See [CHANGELOG.md](./CHANGELOG.md)
