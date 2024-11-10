@@ -1,7 +1,7 @@
 import { WGSLCanvas } from "@wgsl-canvas/core";
 import { Example00Default } from "./examples/Example00Default";
 import { Example01Color } from "./examples/Example01Color";
-import { Example01Uniforms } from "./examples/Example01Uniforms";
+import { Example02Uniforms } from "./examples/Example02Uniforms";
 import { Example02Texture } from "./examples/Example02Texture";
 
 const main = async () => {
@@ -16,7 +16,7 @@ const main = async () => {
   const examples = [
     Example00Default,
     Example01Color,
-    Example01Uniforms, // TODO: rename to "Example02Uniforms"
+    Example02Uniforms,
     Example02Texture, // TODO: rename to "Example03Texture"
   ];
   for (const example of examples) {

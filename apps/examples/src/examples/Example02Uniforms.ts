@@ -1,7 +1,7 @@
 import { WGSLCanvas } from "@wgsl-canvas/core";
-import shaderFragment from "./Example01Uniforms.wgsl?raw";
+import shaderFragment from "./Example02Uniforms.wgsl?raw";
 
-export const Example01Uniforms = async (canvas: HTMLCanvasElement) => {
+export const Example02Uniforms = async (canvas: HTMLCanvasElement) => {
   const wgslCanvas = new WGSLCanvas({ canvas });
   await wgslCanvas.init();
   wgslCanvas.shaderFragment = shaderFragment;
