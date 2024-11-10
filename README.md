@@ -91,6 +91,9 @@ struct Uniforms {
 }
 ```
 
+> [!IMPORTANT]  
+> The order of keys in `struct Uniforms` must be the same as defined in `uniformsKeys` array!
+
 See full example here:
 - [apps/examples/src/examples/Example01Uniforms.ts](./apps/examples/src/examples/Example01Uniforms.ts)
 - [apps/examples/src/examples/Example01Uniforms.wgsl](./apps/examples/src/examples/Example01Uniforms.wgsl)
