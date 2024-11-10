@@ -61,7 +61,7 @@ wgslCanvas.render();
 
 If everything is set up correctly, you should see this picture (which is the default fragment shader located under `WGSLCanvas.SHADER_FRAGMENT_DEFAULT` static field):
 
-<img alt="Default fragment shader" src="./README.shader-default.png" width="500" height="500" />
+<img alt="Default fragment shader" src="./README.shader-default.png" width="250" height="250" />
 
 ### Passing uniforms
 
