@@ -89,7 +89,7 @@ wgslCanvas.shaderFragment = shaderFragment;
 ```
 
 > [!TIP]
-> If you want to store your WGSL code under `.wgsl` files, you should configure your bundler to be able to resolve them as strings. The easiest way is to start with Vite, which can do this out of the box - check out: [Importing Asset as String](https://vite.dev/guide/assets#importing-asset-as-string).
+> If you want to store your WGSL code under `.wgsl` files, you should configure your bundler to be able to resolve them as strings. The easiest way is to start with Vite, which can do this out of the box via [`?raw` suffix](https://vite.dev/guide/assets#importing-asset-as-string).
 
 See full example here:
 - [apps/examples/src/examples/Example01Color.ts](./apps/examples/src/examples/Example01Color.ts)
