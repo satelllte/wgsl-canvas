@@ -24,7 +24,7 @@ const main = async () => {
     canvas.width = 250;
     canvas.height = 250;
     container.appendChild(canvas);
-    await example(canvas); 
+    await example(canvas);
   }
 };
 
