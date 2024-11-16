@@ -14,7 +14,7 @@ export class WGSLCanvas {
   /**
    * Textures list
    */
-  public textures: GPUImageCopyExternalImageSource[] = [];
+  public textures: GPUCopyExternalImageSource[] = [];
 
   /**
    * Default fragment shader
