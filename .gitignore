@@ -1,4 +1,10 @@
+# Artifacts
 .turbo/
-.vscode/
 dist/
 node_modules/
+
+# Code editors
+.vscode/
+
+# System files
+.DS_Store
