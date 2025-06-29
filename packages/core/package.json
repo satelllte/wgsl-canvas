@@ -1,6 +1,6 @@
 {
   "name": "@wgsl-canvas/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple way to run WebGPU shaders on HTML Canvas",
   "keywords": [
     "gpu",
