@@ -19,7 +19,7 @@ export class WGSLCanvas {
   /**
    * Default fragment shader
    */
-  public static SHADER_FRAGMENT_DEFAULT = WGSLCanvasShaderFragment;
+  public static readonly SHADER_FRAGMENT_DEFAULT = WGSLCanvasShaderFragment;
 
   private _shaderFragmentNeedsUpdate = false;
   private _shaderFragment: string = WGSLCanvas.SHADER_FRAGMENT_DEFAULT;
