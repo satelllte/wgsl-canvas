@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 
-/* Inter font | https://rsms.me/inter/download/ */
+/**
+ * Inter font
+ * https://rsms.me/inter/download/
+ */
 :root {
   --font-sans: Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
@@ -8,5 +11,77 @@
 @supports (font-variation-settings: normal) {
   :root {
     --font-sans: InterVariable, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  }
+}
+
+/**
+ * Dark mode variant
+ * https://tailwindcss.com/docs/dark-mode#using-a-data-attribute
+ */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/**
+ * Colors
+ * Credit: https://github.com/radix-ui/colors
+ */
+@theme {
+  --color-gray01: #fcfcfc;
+  --color-gray02: #f9f9f9;
+  --color-gray03: #f0f0f0;
+  --color-gray04: #e8e8e8;
+  --color-gray05: #e0e0e0;
+  --color-gray06: #d9d9d9;
+  --color-gray07: #cecece;
+  --color-gray08: #bbbbbb;
+  --color-gray09: #8d8d8d;
+  --color-gray10: #838383;
+  --color-gray11: #646464;
+  --color-gray12: #202020;
+}
+
+:root[data-theme=dark] {
+  --color-gray01: #111111;
+  --color-gray02: #191919;
+  --color-gray03: #222222;
+  --color-gray04: #2a2a2a;
+  --color-gray05: #313131;
+  --color-gray06: #3a3a3a;
+  --color-gray07: #484848;
+  --color-gray08: #606060;
+  --color-gray09: #6e6e6e;
+  --color-gray10: #7b7b7b;
+  --color-gray11: #b4b4b4;
+  --color-gray12: #eeeeee;
+}
+
+@supports (color: color(display-p3 1 1 1)) {
+  :root {
+    --color-gray01: color(display-p3 0.988 0.988 0.988);
+    --color-gray02: color(display-p3 0.975 0.975 0.975);
+    --color-gray03: color(display-p3 0.939 0.939 0.939);
+    --color-gray04: color(display-p3 0.908 0.908 0.908);
+    --color-gray05: color(display-p3 0.88  0.88  0.88 );
+    --color-gray06: color(display-p3 0.849 0.849 0.849);
+    --color-gray07: color(display-p3 0.807 0.807 0.807);
+    --color-gray08: color(display-p3 0.732 0.732 0.732);
+    --color-gray09: color(display-p3 0.553 0.553 0.553);
+    --color-gray10: color(display-p3 0.512 0.512 0.512);
+    --color-gray11: color(display-p3 0.392 0.392 0.392);
+    --color-gray12: color(display-p3 0.125 0.125 0.125);
+  }
+
+  :root[data-theme=dark] {
+    --color-gray01: color(display-p3 0.067 0.067 0.067);
+    --color-gray02: color(display-p3 0.098 0.098 0.098);
+    --color-gray03: color(display-p3 0.135 0.135 0.135);
+    --color-gray04: color(display-p3 0.163 0.163 0.163);
+    --color-gray05: color(display-p3 0.192 0.192 0.192);
+    --color-gray06: color(display-p3 0.228 0.228 0.228);
+    --color-gray07: color(display-p3 0.283 0.283 0.283);
+    --color-gray08: color(display-p3 0.375 0.375 0.375);
+    --color-gray09: color(display-p3 0.431 0.431 0.431);
+    --color-gray10: color(display-p3 0.484 0.484 0.484);
+    --color-gray11: color(display-p3 0.706 0.706 0.706);
+    --color-gray12: color(display-p3 0.933 0.933 0.933);
   }
 }
