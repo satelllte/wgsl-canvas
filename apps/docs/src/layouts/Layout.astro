@@ -1,8 +1,9 @@
 ---
 import '../styles/global.css';
-import {Hello} from '../components/Hello';
 
-const title = 'WGSL Canvas';
+const { frontmatter } = Astro.props;
+
+const title = `${frontmatter.title} - WGSL Canvas`;
 const description = 'Simple way to run WebGPU shaders on HTML Canvas';
 ---
 
@@ -14,6 +15,6 @@ const description = 'Simple way to run WebGPU shaders on HTML Canvas';
     <meta name='description' content={description} />
   </head>
   <body class='bg-black text-white selection:bg-sky-700'>
-    <Hello client:load />
+    <slot/>
   </body>
 </html>
