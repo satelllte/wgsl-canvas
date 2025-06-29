@@ -1,0 +1,19 @@
+---
+import '../styles/global.css';
+import {Hello} from '../components/Hello';
+
+const title = 'WGSL Canvas';
+const description = 'Simple way to run WebGPU shaders on HTML Canvas';
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover' />
+    <title>{title}</title>
+    <meta name='description' content={description} />
+  </head>
+  <body class='bg-black text-white selection:bg-sky-700'>
+    <Hello />
+  </body>
+</html>
