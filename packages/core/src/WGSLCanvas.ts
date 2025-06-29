@@ -241,27 +241,24 @@ export class WGSLCanvas {
  * Credit:
  * https://github.com/CodyJasonBennett/four
  */
-function std140(
-  uniforms: WGSLCanvasUniform[],
-  buffer?: Float32Array
-): Float32Array {
+function std140(uniforms: WGSLCanvasUniform[]): Float32Array {
   const values = uniforms;
 
-  // Init buffer
+  // Calculate offset
   let offset = 0;
-  if (!buffer) {
-    for (const value of values) {
-      if (typeof value === "number") {
-        offset++; // leave empty space to stack primitives
-      } else {
-        const pad = value.length <= 2 ? pad2 : pad4;
-        offset = pad(offset); // fill in empty space
-        offset += pad(value.length);
-      }
+  for (const value of values) {
+    if (typeof value === "number") {
+      offset++; // leave empty space to stack primitives
+    } else {
+      const pad = value.length <= 2 ? pad2 : pad4;
+      offset = pad(offset); // fill in empty space
+      offset += pad(value.length);
     }
-    offset = pad4(offset); // align to 4 bytes
-    buffer = new Float32Array(offset);
   }
+  offset = pad4(offset); // align to 4 bytes
+
+  // Init buffer
+  let buffer = new Float32Array(offset);
 
   // Pack buffer
   offset = 0;
