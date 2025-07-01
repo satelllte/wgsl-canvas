@@ -5,9 +5,9 @@ export function Home() {
       <Installation/>
       <InstallationTS/>
       <GetStarted/>
-      <PassingShader/>
-      <PassingUniforms/>
-      <PassingTextures/>
+      <Shader/>
+      <Uniforms/>
+      <Textures/>
     </div>
   )
 }
@@ -81,10 +81,10 @@ wgslCanvas.render();`}</Code>
   )
 }
 
-function PassingShader() {
+function Shader() {
   return (
     <SectionStack>
-      <H2>Passing shader</H2>
+      <H2>Shader</H2>
       <P>To pass your shader, define it as a string of WGSL code.</P>
       <Code>{`const shaderFragment = /* wgsl */\`
 struct FragmentOutput {
@@ -105,10 +105,10 @@ fn fragment_main() -> FragmentOutput {
   )
 }
 
-function PassingUniforms() {
+function Uniforms() {
   return (
     <SectionStack>
-      <H2>Passing uniforms</H2>
+      <H2>Uniforms</H2>
       <P>To pass uniforms to your shader, you should first define them in <CodeInline>uniformsKeys</CodeInline> array in your <CodeInline>WGSLCanvas</CodeInline> instance.</P>
       <Code>{`wgslCanvas.uniformsKeys = ["time", "color1", "color2"];`}</Code>
       <P>Then, you can pass the values into <CodeInline>uniforms</CodeInline> object.</P>
@@ -128,10 +128,10 @@ struct Uniforms {
   )
 }
 
-function PassingTextures() {
+function Textures() {
   return (
     <SectionStack>
-      <H2>Passing textures</H2>
+      <H2>Textures</H2>
       <P>Make sure you have your texture file served under some URL (can be absolute or relative).</P>
       <P>Then, you can load it via <CodeInline>WGSLCanvas.loadTexture</CodeInline> static method to get an <CodeInline>ImageBitmap</CodeInline> image.</P>
       <Code>{`const textureUrl = "https://example.com/YOUR_TEXTURE.jpg";
