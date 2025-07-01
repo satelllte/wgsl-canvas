@@ -19,6 +19,11 @@ function Top() {
         WGSL Canvas
       </h1>
       <P>Simple way to run WebGPU shaders on HTML Canvas.</P>
+      <div className="flex justify-center gap-2 text-sm">
+        <Link href="/examples">Examples</Link>
+        <Link href="https://github.com/satelllte/wgsl-canvas">GitHub</Link>
+        <Link href="https://www.npmjs.com/package/@wgsl-canvas/core">NPM</Link>
+      </div>
     </div>
   )
 }
@@ -175,10 +180,11 @@ function Note({type = 'note', children}: {type?: 'tip' | 'note', children: React
 }
 
 function Link({href, children}: {href: string, children: React.ReactNode}) {
+  const internal = href.startsWith('/') && !href.startsWith('//');
   return <a href={href}
     className="underline decoration-[1.5px] decoration-gray10 text-gray11 hover:decoration-gray12 hover:text-gray12 motion-safe:transition-colors"
-    target="_blank"
-    rel="noopener noreferrer"
+    target={internal ? undefined : "_blank"}
+    rel={internal ? undefined : "noopener noreferrer"}
   >{children}</a>
 }
 
