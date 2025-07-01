@@ -6,8 +6,8 @@ export function Home() {
   return (
     <div className="px-4 mx-auto max-w-2xl py-[15vh]">
       <Top/>
-      <Installation/>
-      <InstallationTS/>
+      <Install/>
+      <InstallTS/>
       <GetStarted/>
       <Shader/>
       <Uniforms/>
@@ -30,15 +30,15 @@ function Top() {
   )
 }
 
-function Installation() {
+function Install() {
   return (
-    <Section name="Installation">
+    <Section name="Install">
       <Code>{`npm i --save-exact @wgsl-canvas/core`}</Code>
     </Section>
   )
 }
 
-function InstallationTS() {
+function InstallTS() {
   return (
     <Section name="TypeScript (Recommended)">
       <P>If you're using <Link href="https://www.typescriptlang.org/" >TypeScript</Link>, it would be helpful to add <Link href="https://github.com/gpuweb/types">@webgpu/types</Link>, so your codebase will be aware of WebGPU-related types.</P>
