@@ -87,6 +87,7 @@ await wgslCanvas.init();
 wgslCanvas.render();`}</Code>
       <P>If everything is set up correctly, you should see this output (which is the default fragment shader located under <CodeInline>WGSLCanvas.SHADER_FRAGMENT_DEFAULT</CodeInline> static field).</P>
       <img src="/assets/uv.png" alt="Default fragment shader" className="max-w-[500px] w-full" width={500} height={500}/>
+      <P>See full example <Link href="/examples/default">here</Link>.</P>
     </SectionStack>
   )
 }
@@ -111,6 +112,7 @@ fn fragment_main() -> FragmentOutput {
       <P>Then pass it to <CodeInline>WGSLCanvas</CodeInline> instance via <CodeInline>shaderFragment</CodeInline> property.</P>
       <Code>{`wgslCanvas.shaderFragment = shaderFragment;`}</Code>
       <Note type="tip">If you want to store your WGSL code under <CodeInline>.wgsl</CodeInline> files, you should configure your bundler to be able to resolve them as strings. The easiest way is to start with <Link href="https://vite.dev/">Vite</Link>, which can do this out of the box using <Link href="https://vite.dev/guide/assets#importing-asset-as-string"><CodeInline>?raw</CodeInline> suffix</Link>.</Note>
+      <P>See full example <Link href="/examples/color">here</Link>.</P>
     </SectionStack>
   )
 }
@@ -134,6 +136,7 @@ struct Uniforms {
   color2: vec3<f32>,
 }`}</Code>
       <Note>The order of keys in <CodeInline>struct Uniforms</CodeInline> must be the same as defined in <CodeInline>uniformsKeys</CodeInline> array!</Note>
+      <P>See full example <Link href="/examples/uniforms">here</Link>.</P>
     </SectionStack>
   )
 }
@@ -152,6 +155,7 @@ const texture = await WGSLCanvas.loadTexture(textureUrl);`}</Code>
       <Code>{`@group(0) @binding(0) var texture_sampler: sampler;
 @group(0) @binding(1) var texture: texture_2d<f32>;`}</Code>
       <Note>If you have uniforms, they will appear at <CodeInline>@binding(0)</CodeInline>, but <CodeInline>sampler</CodeInline> and <CodeInline>textures</CodeInline> will appear under their bindings incremented by 1.</Note>
+      <P>See full example <Link href="/examples/texture">here</Link>.</P>
     </SectionStack>
   )
 }
