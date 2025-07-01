@@ -4,6 +4,7 @@ import { Link } from "./ui/Link";
 const examples = [
   'color',
   'default',
+  'noise',
   'texture',
   'uniforms',
 ];
