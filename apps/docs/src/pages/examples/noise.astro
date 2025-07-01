@@ -1,0 +1,64 @@
+---
+import LayoutExample from '../../layouts/LayoutExample.astro';
+---
+
+<LayoutExample name="noise">
+  <script>
+    import { WGSLCanvas } from '@wgsl-canvas/core';
+
+    async function main() {
+      if (!WGSLCanvas.isSupported()) {
+        alert('WebGPU is not supported in this browser.');
+        return;
+      }
+
+      const canvas = document.getElementById('canvas');
+      if (!canvas || !(canvas instanceof HTMLCanvasElement)) return;
+
+      const wgslCanvas = new WGSLCanvas({ canvas });
+      await wgslCanvas.init();
+
+      wgslCanvas.uniformsKeys = ["time"];
+      wgslCanvas.uniforms.time = 0.0;
+      wgslCanvas.shaderFragment = /* wgsl */`
+        @group(0) @binding(0) var<uniform> uniforms: Uniforms;
+
+        struct Uniforms {
+          time: f32,
+        }
+
+        fn noise(xy: vec2<f32>) -> f32 {
+          return fract(sin(dot(xy, vec2<f32>(12.9898, 78.233))) * 41567.5453 * uniforms.time);
+        }
+
+        struct FragmentInput {
+          @location(0) coord: vec2<f32>,
+        }
+
+        struct FragmentOutput {
+          @location(0) color: vec4<f32>,
+        }
+
+        @fragment
+        fn fragment_main(input: FragmentInput) -> FragmentOutput {
+          var output: FragmentOutput;
+          var xy: vec2<f32> = input.coord.xy * 0.5 + 0.5;
+          var blend: f32 = noise(xy);
+          output.color = vec4<f32>(vec3<f32>(blend), 1.0);
+          return output;
+        }
+      `;
+
+      const frame: FrameRequestCallback = (timeMs) => {
+        const time = timeMs * 0.001;
+        wgslCanvas.uniforms.time = time;
+        wgslCanvas.render();
+
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    }
+
+    void main();
+  </script>
+</Layout>
