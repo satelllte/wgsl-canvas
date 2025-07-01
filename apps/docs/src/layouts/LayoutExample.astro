@@ -4,33 +4,12 @@ interface Props {
 }
 
 import Layout from './Layout.astro';
+import { Example } from '../components/Example';
 
 const { name } = Astro.props;
-const hrefSource = `https://github.com/satelllte/wgsl-canvas/tree/main/apps/docs/src/pages/examples/${name}.astro`;
 ---
 
 <Layout>
-  <div class="p-4 flex flex-col md:flex-row gap-4">
-    <div class="min-w-3xs">
-      <div class="flex flex-col gap-4">
-        <div>
-          <a href="/" class="text-gray12 font-bold text-2xl">WGSL Canvas</a>
-          <div class="text-gray-11 text-sm">Examples</div>
-        </div>
-        <div class="flex flex-col">
-          <a class="text-sm text-gray11 underline hover:decoration-gray12 hover:text-gray12 motion-safe:transition-colors inline-block" href="/examples/color">color</a>
-          <a class="text-sm text-gray11 underline hover:decoration-gray12 hover:text-gray12 motion-safe:transition-colors inline-block" href="/examples/default">default</a>
-          <hr class="mt-2 text-gray07 md:hidden"/>
-        </div>
-      </div>
-    </div>
-    <div class="flex flex-col gap-4">
-      <div class="flex flex-col gap-0">
-        <h1 class="text-lg font-semibold">{name}</h1>
-        <a href={hrefSource} target="_blank" class="text-sm underline decoration-[1.5px] decoration-gray10 text-gray11 hover:decoration-gray12 hover:text-gray12 motion-safe:transition-colors">View source</a>
-      </div>
-      <canvas id="canvas" class="max-w-full" width="512" height="512"></canvas>
-    </div>
-  </div>
+  <Example name={name}/>
   <slot/>
 </Layout>
