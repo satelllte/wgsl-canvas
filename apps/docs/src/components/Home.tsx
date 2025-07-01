@@ -33,7 +33,7 @@ function Installation() {
 function InstallationTS() {
   return (
     <SectionStack>
-      <H2>With TypeScript (Recommended)</H2>
+      <H2>TypeScript (Recommended)</H2>
       <P>If you're using <Link href="https://www.typescriptlang.org/" >TypeScript</Link>, it would be helpful to add <Link href="https://github.com/gpuweb/types">@webgpu/types</Link>, so your codebase will be aware of WebGPU-related types.</P>
       <Code>{`npm i --save-dev @webgpu/types`}</Code>
       <P>Then add them into your <CodeInline>tsconfig.json</CodeInline>.</P>
