@@ -1,5 +1,6 @@
 import { Code, CodeInline } from "./ui/Code"
 import { H2 } from "./ui/Heading"
+import { Link } from "./ui/Link"
 
 export function Home() {
   return (
@@ -177,15 +178,6 @@ function Note({type = 'note', children}: {type?: 'tip' | 'note', children: React
       {children}
     </P>
   </div>
-}
-
-function Link({href, children}: {href: string, children: React.ReactNode}) {
-  const internal = href.startsWith('/') && !href.startsWith('//');
-  return <a href={href}
-    className="underline decoration-[1.5px] decoration-gray10 text-gray11 hover:decoration-gray12 hover:text-gray12 motion-safe:transition-colors"
-    target={internal ? undefined : "_blank"}
-    rel={internal ? undefined : "noopener noreferrer"}
-  >{children}</a>
 }
 
 function IconInfo() {

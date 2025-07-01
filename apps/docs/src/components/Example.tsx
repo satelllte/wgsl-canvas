@@ -1,4 +1,5 @@
 import { LayoutSide } from "./LayoutSide";
+import { Link } from "./ui/Link";
 
 const examples = [
   'color',
@@ -25,7 +26,7 @@ export function Example({ name }: ExampleProps) {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-0">
           <h1 className="text-lg font-semibold">{name}</h1>
-          <a href={hrefSource} target="_blank" className="text-sm underline decoration-[1.5px] decoration-gray10 text-gray11 hover:decoration-gray12 hover:text-gray12 motion-safe:transition-colors">View source</a>
+          <Link size="sm" href={hrefSource}>View source</Link>
         </div>
         <canvas id="canvas" className="max-w-full" width="512" height="512"></canvas>
       </div>
@@ -39,14 +40,9 @@ type LinkToExampleProps = {
 };
 
 function LinkToExample({name, selected}: LinkToExampleProps) {
-  let className = "text-sm text-gray11 underline hover:decoration-gray12 hover:text-gray12 motion-safe:transition-colors inline-block";
-  if (selected) {
-    className += ' font-bold';
-  }
-  
   return (
-    <a href={`/examples/${name}`} className={className}>
+    <Link size="sm" weight={selected ? 'bold' : undefined} href={`/examples/${name}`}>
       {name}
-    </a>
+    </Link>
   );
 }
