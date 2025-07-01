@@ -122,7 +122,7 @@ struct Uniforms {
   color1: vec3<f32>,
   color2: vec3<f32>,
 }`}</Code>
-      <Note type="note">The order of keys in <CodeInline>struct Uniforms</CodeInline> must be the same as defined in <CodeInline>uniformsKeys</CodeInline> array!</Note>
+      <Note>The order of keys in <CodeInline>struct Uniforms</CodeInline> must be the same as defined in <CodeInline>uniformsKeys</CodeInline> array!</Note>
     </SectionStack>
   )
 }
@@ -143,9 +143,9 @@ function P({children}: {children: React.ReactNode}) {
   return <p className="text-gray11">{children}</p>
 }
 
-function Note({type, children}: {type: 'tip' | 'note', children: React.ReactNode}) {
-  let mark = 'Tip';
-  if (type === 'note') mark = 'Note';
+function Note({type = 'note', children}: {type?: 'tip' | 'note', children: React.ReactNode}) {
+  let mark = 'Note';
+  if (type === 'tip') mark = 'Tip';
 
   return <div className="pl-4 flex flex-col gap-1 border-l-2 border-gray05">
     <div className="text-gray11 flex items-center gap-1"><IconInfo/> <span className="font-medium">{mark}</span></div>
