@@ -11,7 +11,7 @@ export function LayoutSide({name, children, sidebar}: LayoutSideProps) {
         <div className="flex flex-col gap-4">
           <div>
             <a href="/" className="text-gray12 font-bold text-2xl">WGSL Canvas</a>
-            <div className="text-gray-11 text-sm">{name}</div>
+            <h1 className="text-gray-11 text-sm">{name}</h1>
           </div>
           {sidebar}
         </div>
