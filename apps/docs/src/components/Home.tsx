@@ -13,6 +13,7 @@ export function Home() {
       <Uniforms/>
       <Textures/>
       <Examples/>
+      <Links/>
     </div>
   )
 }
@@ -24,12 +25,7 @@ function Top() {
         WGSL Canvas
       </h1>
       <P>Simple way to run WebGPU shaders on HTML Canvas.</P>
-      <div className="flex justify-center gap-2 text-sm">
-        <Link href="/examples">Examples</Link>
-        <Link href="/changelog">Changelog</Link>
-        <Link href="https://github.com/satelllte/wgsl-canvas">GitHub</Link>
-        <Link href="https://www.npmjs.com/package/@wgsl-canvas/core">NPM</Link>
-      </div>
+      <AllLinks centered />
     </div>
   )
 }
@@ -167,6 +163,28 @@ function Examples() {
       <H2>Examples</H2>
       <P>Check out various examples <Link href="/examples">here</Link>.</P>
     </SectionStack>
+  )
+}
+
+function Links() {
+  return (
+    <SectionStack>
+      <H2>Links</H2>
+      <AllLinks/>
+    </SectionStack>
+  )
+}
+
+function AllLinks({centered = false}: {centered?: boolean}) {
+  let className = "flex gap-2 text-sm";
+  if (centered) className += ` justify-center`;
+  return (
+    <div className={className}>
+      <Link href="/examples">Examples</Link>
+      <Link href="/changelog">Changelog</Link>
+      <Link href="https://github.com/satelllte/wgsl-canvas">GitHub</Link>
+      <Link href="https://www.npmjs.com/package/@wgsl-canvas/core">NPM</Link>
+    </div>
   )
 }
 
