@@ -6,12 +6,21 @@ import LayoutExample from '../../layouts/LayoutExample.astro';
   <script>
     import { WGSLCanvas } from '@wgsl-canvas/core';
 
-    const canvas = document.getElementById('canvas');
-    if (!canvas || !(canvas instanceof HTMLCanvasElement)) throw new Error('Invalid canvas setup')
+    async function main() {
+      if (!WGSLCanvas.isSupported()) {
+        alert('WebGPU is not supported in this browser.');
+        return;
+      }
 
-    const wgslCanvas = new WGSLCanvas({ canvas });
-    await wgslCanvas.init();
+      const canvas = document.getElementById('canvas');
+      if (!canvas || !(canvas instanceof HTMLCanvasElement)) return;
 
-    wgslCanvas.render();
+      const wgslCanvas = new WGSLCanvas({ canvas });
+      await wgslCanvas.init();
+
+      wgslCanvas.render();
+    }
+
+    void main();
   </script>
 </Layout>
