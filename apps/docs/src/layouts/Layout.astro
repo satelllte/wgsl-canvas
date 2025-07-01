@@ -7,7 +7,8 @@ type Props = {
 
 const { name } = Astro.props;
 
-const title = name ? `${name} – WGSL Canvas` : `WGSL Canvas`;
+const siteName = 'WGSL Canvas';
+const title = name ? `${name} - ${siteName}` : `${siteName}`;
 const description = 'Simple way to run WebGPU shaders on HTML Canvas';
 ---
 
@@ -15,8 +16,28 @@ const description = 'Simple way to run WebGPU shaders on HTML Canvas';
   <head>
     <meta charset='utf-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover' />
+
     <title>{title}</title>
     <meta name='description' content={description} />
+
+    <!-- Open Graph -->
+    <meta property='og:title' content={title} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property='og:site_name' content={siteName} />
+    <meta property='og:description' content={description} />
+    <meta property='og:image' content='/og.png' />
+    <meta property='og:image:alt' content={description} />
+    <meta name='twitter:card' content='summary_large_image' />
+    <meta name='twitter:title' content={title} />
+    <meta name='twitter:description' content={description} />
+    <meta name='twitter:image' content='/og.png' />
+    <meta name='twitter:image:alt' content={description} />
+
+    <!-- Icons -->
+    <link rel='icon' href='/favicon.ico' type='image/x-icon' sizes='48x48' />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel='apple-touch-icon' href='/apple-icon.png' type='image/png' sizes='180x180' />
 
     <!-- Inter font | https://rsms.me/inter/download/ -->
     <link rel="preconnect" href="https://rsms.me/">
