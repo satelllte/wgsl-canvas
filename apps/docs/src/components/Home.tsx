@@ -32,17 +32,15 @@ function Top() {
 
 function Installation() {
   return (
-    <SectionStack>
-      <H2>Installation</H2>
+    <Section name="Installation">
       <Code>{`npm i --save-exact @wgsl-canvas/core`}</Code>
-    </SectionStack>
+    </Section>
   )
 }
 
 function InstallationTS() {
   return (
-    <SectionStack>
-      <H2>TypeScript (Recommended)</H2>
+    <Section name="TypeScript (Recommended)">
       <P>If you're using <Link href="https://www.typescriptlang.org/" >TypeScript</Link>, it would be helpful to add <Link href="https://github.com/gpuweb/types">@webgpu/types</Link>, so your codebase will be aware of WebGPU-related types.</P>
       <Code>{`npm i --save-dev @webgpu/types`}</Code>
       <P>Then add them into your <CodeInline>tsconfig.json</CodeInline>.</P>
@@ -53,14 +51,13 @@ function InstallationTS() {
     "types": ["@webgpu/types"]
   }
 }`}</Code>
-    </SectionStack>
+    </Section>
   )
 }
 
 function GetStarted() {
   return (
-    <SectionStack>
-      <H2>Get started</H2>
+    <Section name="Get started">
       <P>Here's the base example for you to get started.</P>
       <Code>{`import { WGSLCanvas } from "@wgsl-canvas/core";
 
@@ -85,14 +82,13 @@ wgslCanvas.render();`}</Code>
       <P>If everything is set up correctly, you should see this output (which is the default fragment shader located under <CodeInline>WGSLCanvas.SHADER_FRAGMENT_DEFAULT</CodeInline> static field).</P>
       <img src="/assets/uv.png" alt="Default fragment shader" className="max-w-[500px] w-full" width={500} height={500}/>
       <P>See full example <Link href="/examples/default">here</Link>.</P>
-    </SectionStack>
+    </Section>
   )
 }
 
 function Shader() {
   return (
-    <SectionStack>
-      <H2>Shader</H2>
+    <Section name="Shader">
       <P>To pass your shader, define it as a string of WGSL code.</P>
       <Code>{`const shaderFragment = /* wgsl */\`
 struct FragmentOutput {
@@ -110,14 +106,13 @@ fn fragment_main() -> FragmentOutput {
       <Code>{`wgslCanvas.shaderFragment = shaderFragment;`}</Code>
       <Note type="tip">If you want to store your WGSL code under <CodeInline>.wgsl</CodeInline> files, you should configure your bundler to be able to resolve them as strings. The easiest way is to start with <Link href="https://vite.dev/">Vite</Link>, which can do this out of the box using <Link href="https://vite.dev/guide/assets#importing-asset-as-string"><CodeInline>?raw</CodeInline> suffix</Link>.</Note>
       <P>See full example <Link href="/examples/color">here</Link>.</P>
-    </SectionStack>
+    </Section>
   )
 }
 
 function Uniforms() {
   return (
-    <SectionStack>
-      <H2>Uniforms</H2>
+    <Section name="Uniforms">
       <P>To pass uniforms to your shader, you should first define them in <CodeInline>uniformsKeys</CodeInline> array in your <CodeInline>WGSLCanvas</CodeInline> instance.</P>
       <Code>{`wgslCanvas.uniformsKeys = ["time", "color1", "color2"];`}</Code>
       <P>Then, you can pass the values into <CodeInline>uniforms</CodeInline> object.</P>
@@ -134,14 +129,13 @@ struct Uniforms {
 }`}</Code>
       <Note>The order of keys in <CodeInline>struct Uniforms</CodeInline> must be the same as defined in <CodeInline>uniformsKeys</CodeInline> array!</Note>
       <P>See full example <Link href="/examples/uniforms">here</Link>.</P>
-    </SectionStack>
+    </Section>
   )
 }
 
 function Textures() {
   return (
-    <SectionStack>
-      <H2>Textures</H2>
+    <Section name="Textures">
       <P>Make sure you have your texture file served under some URL (can be absolute or relative).</P>
       <P>Then, you can load it via <CodeInline>WGSLCanvas.loadTexture</CodeInline> static method to get an <CodeInline>ImageBitmap</CodeInline> image.</P>
       <Code>{`const textureUrl = "https://example.com/YOUR_TEXTURE.jpg";
@@ -153,25 +147,23 @@ const texture = await WGSLCanvas.loadTexture(textureUrl);`}</Code>
 @group(0) @binding(1) var texture: texture_2d<f32>;`}</Code>
       <Note>If you have uniforms, they will appear at <CodeInline>@binding(0)</CodeInline>, but <CodeInline>sampler</CodeInline> and <CodeInline>textures</CodeInline> will appear under their bindings incremented by 1.</Note>
       <P>See full example <Link href="/examples/texture">here</Link>.</P>
-    </SectionStack>
+    </Section>
   )
 }
 
 function Examples() {
   return (
-    <SectionStack>
-      <H2>Examples</H2>
+    <Section name="Examples">
       <P>Check out various examples <Link href="/examples">here</Link>.</P>
-    </SectionStack>
+    </Section>
   )
 }
 
 function Links() {
   return (
-    <SectionStack>
-      <H2>Links</H2>
+    <Section name="Links">
       <AllLinks/>
-    </SectionStack>
+    </Section>
   )
 }
 
@@ -188,9 +180,10 @@ function AllLinks({centered = false}: {centered?: boolean}) {
   )
 }
 
-function SectionStack({children}: {children: React.ReactNode}) {
+function Section({name, children}: { name: string, children: React.ReactNode }) {
   return (
     <div className="pt-16 flex flex-col gap-3">
+      <H2>{name}</H2>
       {children}
     </div>
   )
