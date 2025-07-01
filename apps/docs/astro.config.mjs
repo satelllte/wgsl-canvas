@@ -1,12 +1,11 @@
 // @ts-check
 import {defineConfig} from 'astro/config';
-import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), react()],
+  integrations: [react()],
   vite: {
     plugins: [
       // This most probably started to happen due to some Vite v6 / v7 discrepancies.
