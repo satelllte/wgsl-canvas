@@ -7,6 +7,7 @@ export function Home() {
       <GetStarted/>
       <PassingShader/>
       <PassingUniforms/>
+      <PassingTextures/>
     </div>
   )
 }
@@ -123,6 +124,24 @@ struct Uniforms {
   color2: vec3<f32>,
 }`}</Code>
       <Note>The order of keys in <CodeInline>struct Uniforms</CodeInline> must be the same as defined in <CodeInline>uniformsKeys</CodeInline> array!</Note>
+    </SectionStack>
+  )
+}
+
+function PassingTextures() {
+  return (
+    <SectionStack>
+      <H2>Passing textures</H2>
+      <P>Make sure you have your texture file served under some URL (can be absolute or relative).</P>
+      <P>Then, you can load it via <CodeInline>WGSLCanvas.loadTexture</CodeInline> static method to get an <CodeInline>ImageBitmap</CodeInline> image.</P>
+      <Code>{`const textureUrl = "https://example.com/YOUR_TEXTURE.jpg";
+const texture = await WGSLCanvas.loadTexture(textureUrl);`}</Code>
+      <P>Then, pass it into the <CodeInline>textures</CodeInline> array of your <CodeInline>WgslCanvas</CodeInline> instance.</P>
+      <Code>{`wgslCanvas.textures = [texture];`}</Code>
+      <P>In WGSL shader, it'll appear under the following vars.</P>
+      <Code>{`@group(0) @binding(0) var texture_sampler: sampler;
+@group(0) @binding(1) var texture: texture_2d<f32>;`}</Code>
+      <Note>If you have uniforms, they will appear at <CodeInline>@binding(0)</CodeInline>, but <CodeInline>sampler</CodeInline> and <CodeInline>textures</CodeInline> will appear under their bindings incremented by 1.</Note>
     </SectionStack>
   )
 }
