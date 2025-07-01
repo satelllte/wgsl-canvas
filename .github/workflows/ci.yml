@@ -31,6 +31,5 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: wgsl-canvas
-          directory: apps/docs/dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy apps/docs/dist --project-name=wgsl-canvas
