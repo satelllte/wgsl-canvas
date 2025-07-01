@@ -1,5 +1,5 @@
 ---
-interface Props {
+type Props = {
   name: string;
 }
 
@@ -9,7 +9,7 @@ import { Example } from '../components/Example';
 const { name } = Astro.props;
 ---
 
-<Layout>
+<Layout name="Examples">
   <Example name={name}/>
   <slot/>
 </Layout>

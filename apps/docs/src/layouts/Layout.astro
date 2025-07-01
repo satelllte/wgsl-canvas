@@ -1,7 +1,13 @@
 ---
 import '../styles/global.css';
 
-const title = `WGSL Canvas`;
+type Props = {
+  name?: string;
+}
+
+const { name } = Astro.props;
+
+const title = name ? `${name} – WGSL Canvas` : `WGSL Canvas`;
 const description = 'Simple way to run WebGPU shaders on HTML Canvas';
 ---
 

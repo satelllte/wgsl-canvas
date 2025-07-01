@@ -1,3 +1,5 @@
+import { LayoutSide } from "./LayoutSide";
+
 const examples = [
   'color',
   'default',
@@ -10,23 +12,16 @@ type ExampleProps = {
 export function Example({ name }: ExampleProps) {
   const hrefSource = `https://github.com/satelllte/wgsl-canvas/tree/main/apps/docs/src/pages/examples/${name}.astro`;
   return (
-    <div className="p-4 flex flex-col md:flex-row gap-4">
-      <div className="min-w-3xs">
-        <div className="flex flex-col gap-4">
-          <div>
-            <a href="/" className="text-gray12 font-bold text-2xl">WGSL Canvas</a>
-            <div className="text-gray-11 text-sm">Examples</div>
-          </div>
-          <div className="flex flex-col items-start">
-            {examples.map(example => {
-              return (
-                <LinkToExample key={example} name={example} selected={example === name}/>
-              );
-            })}
-            <hr className="mt-2 text-gray07 md:hidden"/>
-          </div>
-        </div>
+    <LayoutSide name="Examples" sidebar={(
+      <div className="flex flex-col items-start">
+        {examples.map(example => {
+          return (
+            <LinkToExample key={example} name={example} selected={example === name}/>
+          );
+        })}
       </div>
+    )}
+    >
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-0">
           <h1 className="text-lg font-semibold">{name}</h1>
@@ -34,7 +29,7 @@ export function Example({ name }: ExampleProps) {
         </div>
         <canvas id="canvas" className="max-w-full" width="512" height="512"></canvas>
       </div>
-    </div>
+    </LayoutSide>
   )
 }
 
