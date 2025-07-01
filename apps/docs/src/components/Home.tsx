@@ -12,6 +12,7 @@ export function Home() {
       <Shader/>
       <Uniforms/>
       <Textures/>
+      <Examples/>
     </div>
   )
 }
@@ -156,6 +157,15 @@ const texture = await WGSLCanvas.loadTexture(textureUrl);`}</Code>
 @group(0) @binding(1) var texture: texture_2d<f32>;`}</Code>
       <Note>If you have uniforms, they will appear at <CodeInline>@binding(0)</CodeInline>, but <CodeInline>sampler</CodeInline> and <CodeInline>textures</CodeInline> will appear under their bindings incremented by 1.</Note>
       <P>See full example <Link href="/examples/texture">here</Link>.</P>
+    </SectionStack>
+  )
+}
+
+function Examples() {
+  return (
+    <SectionStack>
+      <H2>Examples</H2>
+      <P>Check out various examples <Link href="/examples">here</Link>.</P>
     </SectionStack>
   )
 }
