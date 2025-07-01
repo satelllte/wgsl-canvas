@@ -1,0 +1,17 @@
+---
+import LayoutExample from '../../layouts/LayoutExample.astro';
+---
+
+<LayoutExample name="default">
+  <script>
+    import { WGSLCanvas } from '@wgsl-canvas/core';
+
+    const canvas = document.getElementById('canvas');
+    if (!canvas || !(canvas instanceof HTMLCanvasElement)) throw new Error('Invalid canvas setup')
+
+    const wgslCanvas = new WGSLCanvas({ canvas });
+    await wgslCanvas.init();
+
+    wgslCanvas.render();
+  </script>
+</Layout>

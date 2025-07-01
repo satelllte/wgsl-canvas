@@ -15,4 +15,7 @@ export default defineConfig({
       tailwindcss()
     ],
   },
+  redirects: {
+    '/examples': '/examples/default',
+  }
 });

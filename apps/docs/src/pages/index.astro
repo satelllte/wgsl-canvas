@@ -1,35 +1,9 @@
 ---
-import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
 import {Home} from '../components/Home';
 
-const title = `WGSL Canvas`;
-const description = 'Simple way to run WebGPU shaders on HTML Canvas';
 ---
 
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover' />
-    <title>{title}</title>
-    <meta name='description' content={description} />
-
-    <!-- Inter font | https://rsms.me/inter/download/ -->
-    <link rel="preconnect" href="https://rsms.me/">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-
-    <!-- Theme -->
-    <script is:inline>
-      (() => {
-        let theme = window.localStorage.getItem('theme');
-        if (theme !== 'light' && theme !== 'dark') {
-          theme = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
-        }
-        document.documentElement.setAttribute('data-theme', theme);
-        window.localStorage.setItem('theme', theme);
-      })();
-    </script>
-  </head>
-  <body class='antialiased bg-gray01 text-gray12 selection:bg-gray05'>
-    <Home/>
-  </body>
-</html>
+<Layout>
+  <Home/>
+</Layout>
