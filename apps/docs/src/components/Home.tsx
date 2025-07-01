@@ -172,6 +172,7 @@ function AllLinks({centered = false}: {centered?: boolean}) {
   if (centered) className += ` justify-center`;
   return (
     <div className={className}>
+      <Link href="/api">API</Link>
       <Link href="/examples">Examples</Link>
       <Link href="/changelog">Changelog</Link>
       <Link href="https://github.com/satelllte/wgsl-canvas">GitHub</Link>
