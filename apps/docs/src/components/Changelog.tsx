@@ -1,4 +1,5 @@
 import { LayoutSide } from "./LayoutSide"
+import { CodeInline } from "./ui/Code"
 
 export function Changelog() {
   return (
@@ -51,11 +52,4 @@ function LI({children}: {children: React.ReactNode}) {
 // TODO: Re-use together with "Home.tsx"
 function H2({children}: {children: React.ReactNode}) {
   return <h2 className="text-xl font-medium">{children}</h2>
-}
-
-// TODO: Re-use together with "Home.tsx"
-function CodeInline({ children }: { children: React.ReactNode }) {
-  return (
-    <code className="text-gray11 text-sm rounded-md border border-gray03 border-solid bg-gray02 py-0.5 px-1">{children}</code>
-  )
 }

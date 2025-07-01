@@ -1,3 +1,5 @@
+import { Code, CodeInline } from "./ui/Code"
+
 export function Home() {
   return (
     <div className="px-4 mx-auto max-w-2xl py-[15vh]">
@@ -187,22 +189,6 @@ function Link({href, children}: {href: string, children: React.ReactNode}) {
     target={internal ? undefined : "_blank"}
     rel={internal ? undefined : "noopener noreferrer"}
   >{children}</a>
-}
-
-function Code({ children }: {children: React.ReactNode}) {
-  return (
-    <code className="text-gray11 text-sm px-3 py-2 bg-gray02 rounded-md w-full flex min-h-10 items-center border border-gray03 border-solid overflow-x-auto">
-      <pre>
-        {children}
-      </pre>
-    </code>
-  );
-}
-
-function CodeInline({ children }: { children: React.ReactNode }) {
-  return (
-    <code className="text-gray11 text-sm rounded-md border border-gray03 border-solid bg-gray02 py-0.5 px-1">{children}</code>
-  )
 }
 
 function IconInfo() {
