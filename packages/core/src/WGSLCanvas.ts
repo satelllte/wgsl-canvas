@@ -2,6 +2,9 @@ import { WGSLCanvasShaderFragment } from "./WGSLCanvas.shader.fragment.wgsl.js";
 import { WGSLCanvasShaderVertex } from "./WGSLCanvas.shader.vertex.wgsl.js";
 import type { WGSLCanvasUniform } from "./WGSLCanvasUniform.js";
 
+/**
+ * Class providing a high-level abstraction for rendering WebGPU fragment shader directly onto an HTML <canvas> element.
+ */
 export class WGSLCanvas {
   /**
    * Uniforms object

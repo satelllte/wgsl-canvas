@@ -28,7 +28,7 @@ export function Example({ name }: ExampleProps) {
     >
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-0">
-          <h1 className="text-lg font-semibold">{name}</h1>
+          <h2 className="text-lg font-semibold">{name}</h2>
           <Link size="sm" href={hrefSource}>View source</Link>
         </div>
         <canvas id="canvas" className="max-w-[512px] w-full" width="512" height="512"></canvas>
