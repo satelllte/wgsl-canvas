@@ -1,4 +1,5 @@
 import { Code, CodeInline } from "./ui/Code"
+import { H2 } from "./ui/Heading"
 
 export function Home() {
   return (
@@ -160,10 +161,6 @@ function SectionStack({children}: {children: React.ReactNode}) {
       {children}
     </div>
   )
-}
-
-function H2({children}: {children: React.ReactNode}) {
-  return <h2 className="text-xl font-medium">{children}</h2>
 }
 
 function P({children}: {children: React.ReactNode}) {

@@ -1,5 +1,6 @@
 import { LayoutSide } from "./LayoutSide"
 import { CodeInline } from "./ui/Code"
+import { H2 } from "./ui/Heading"
 
 export function Changelog() {
   return (
@@ -47,9 +48,4 @@ function LI({children}: {children: React.ReactNode}) {
   return (
     <li className="text-gray11">{children}</li>
   )
-}
-
-// TODO: Re-use together with "Home.tsx"
-function H2({children}: {children: React.ReactNode}) {
-  return <h2 className="text-xl font-medium">{children}</h2>
 }
