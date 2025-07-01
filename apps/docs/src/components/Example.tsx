@@ -19,19 +19,8 @@ export function Example({ name }: ExampleProps) {
           </div>
           <div className="flex flex-col items-start">
             {examples.map(example => {
-              let className = "text-sm text-gray11 underline hover:decoration-gray12 hover:text-gray12 motion-safe:transition-colors inline-block";
-              if (example === name) {
-                className += ' font-bold';
-              }
-              
               return (
-                <a
-                  key={example}
-                  className={className}
-                  href={`/examples/${example}`}
-                >
-                  {example}
-                </a>
+                <LinkToExample key={example} name={example} selected={example === name}/>
               );
             })}
             <hr className="mt-2 text-gray07 md:hidden"/>
@@ -47,4 +36,22 @@ export function Example({ name }: ExampleProps) {
       </div>
     </div>
   )
+}
+
+type LinkToExampleProps = {
+  name: string;
+  selected: boolean;
+};
+
+function LinkToExample({name, selected}: LinkToExampleProps) {
+  let className = "text-sm text-gray11 underline hover:decoration-gray12 hover:text-gray12 motion-safe:transition-colors inline-block";
+  if (selected) {
+    className += ' font-bold';
+  }
+  
+  return (
+    <a href={`/examples/${name}`} className={className}>
+      {name}
+    </a>
+  );
 }
