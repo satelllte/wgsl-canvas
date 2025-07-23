@@ -1,0 +1,15 @@
+---
+type Props = {
+  name: string;
+}
+
+import Layout from './Layout.astro';
+import { Example } from '../components/Example';
+
+const { name } = Astro.props;
+---
+
+<Layout name="Examples">
+  <Example name={name}/>
+  <slot/>
+</Layout>

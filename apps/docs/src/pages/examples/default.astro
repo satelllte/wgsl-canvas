@@ -1,0 +1,26 @@
+---
+import LayoutExample from '../../layouts/LayoutExample.astro';
+---
+
+<LayoutExample name="default">
+  <script>
+    import { WGSLCanvas } from '@wgsl-canvas/core';
+
+    async function main() {
+      if (!WGSLCanvas.isSupported()) {
+        alert('WebGPU is not supported in this browser.');
+        return;
+      }
+
+      const canvas = document.getElementById('canvas');
+      if (!canvas || !(canvas instanceof HTMLCanvasElement)) return;
+
+      const wgslCanvas = new WGSLCanvas({ canvas });
+      await wgslCanvas.init();
+
+      wgslCanvas.render();
+    }
+
+    void main();
+  </script>
+</Layout>
