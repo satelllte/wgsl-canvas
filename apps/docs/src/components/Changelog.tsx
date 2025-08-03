@@ -6,6 +6,11 @@ export function Changelog() {
   return (
     <LayoutSide name="Changelog">
       <div className="flex flex-col gap-8">
+        <LogEntry version="v0.0.4">
+          <UL>
+            <LI>Renamed <CodeInline>xy</CodeInline> to <CodeInline>uv</CodeInline> in <CodeInline>WGSLCanvas.SHADER_FRAGMENT_DEFAULT</CodeInline>.</LI>
+          </UL>
+        </LogEntry>
         <LogEntry version="v0.0.3">
           <UL>
             <LI>Marked <CodeInline>WGSLCanvas.SHADER_FRAGMENT_DEFAULT</CodeInline> as read-only.</LI>
