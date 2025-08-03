@@ -10,8 +10,8 @@ struct FragmentOutput {
 @fragment
 fn fragment_main(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
-  var xy: vec2<f32> = input.coord.xy * 0.5 + 0.5;
-  output.color = vec4<f32>(xy, 0.0, 1.0);
+  var uv: vec2<f32> = input.coord * 0.5 + 0.5;
+  output.color = vec4<f32>(uv, 0.0, 1.0);
   return output;
 }
 `;
