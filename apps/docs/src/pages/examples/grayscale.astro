@@ -1,0 +1,53 @@
+---
+import LayoutExample from '../../layouts/LayoutExample.astro';
+---
+
+<LayoutExample name='grayscale'>
+  <script>
+    import { WGSLCanvas } from '@wgsl-canvas/core';
+
+    async function main() {
+      if (!WGSLCanvas.isSupported()) {
+        alert('WebGPU is not supported in this browser.');
+        return;
+      }
+
+      const canvas = document.getElementById('canvas');
+      if (!canvas || !(canvas instanceof HTMLCanvasElement)) return;
+
+      const wgslCanvas = new WGSLCanvas({ canvas });
+      await wgslCanvas.init();
+
+      const textureUrl = "/assets/jade.jpg";
+      const texture = await WGSLCanvas.loadTexture(textureUrl);
+
+      wgslCanvas.textures = [texture];
+      wgslCanvas.shaderFragment = /* wgsl */`
+        @group(0) @binding(0) var texture_sampler: sampler;
+        @group(0) @binding(1) var texture: texture_2d<f32>;
+
+        struct FragmentInput {
+          @location(0) coord: vec2<f32>,
+        }
+
+        struct FragmentOutput {
+          @location(0) color: vec4<f32>,
+        }
+
+        @fragment
+        fn fragment_main(input: FragmentInput) -> FragmentOutput {
+          var output: FragmentOutput;
+          var uv: vec2<f32> = input.coord * 0.5 + 0.5;
+          let color = textureSample(texture, texture_sampler, uv);
+          let gray = dot(color.rgb, vec3<f32>(0.299, 0.587, 0.114));
+          output.color = vec4<f32>(gray, gray, gray, color.a);
+          return output;
+        }
+      `;
+
+      wgslCanvas.render();
+    }
+
+    void main();
+  </script>
+</LayoutExample>
