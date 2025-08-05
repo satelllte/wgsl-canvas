@@ -22,8 +22,8 @@ fn fragment_main(input: FragmentInput) -> FragmentOutput {
   let dist_blob = distance(uv, center);
   let dist_mouse = distance(vec2<f32>(0.5), vec2<f32>(uniforms.mouse.x, 1.0 - uniforms.mouse.y));
   let edge = 0.04 + dist_mouse * 0.5 + 0.01 * sin(uniforms.time + uv.x * 12.5 + uv.y * 12.5);
-  let edgeMask = smoothstep(radius - edge, radius - edge * 0.5, dist_blob) - smoothstep(radius, radius + edge * 0.5, dist_blob);
-  let color = mix(vec3<f32>(0.2), vec3<f32>(0.8), edgeMask);
+  let edge_mask = smoothstep(radius - edge, radius - edge * 0.5, dist_blob) - smoothstep(radius, radius + edge * 0.5, dist_blob);
+  let color = mix(vec3<f32>(0.2), vec3<f32>(0.8), edge_mask);
   output.color = vec4<f32>(color, 1.0);
   return output;
 }
