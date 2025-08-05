@@ -5,6 +5,8 @@ const examples = [
   'color',
   'default',
   'grayscale',
+  'mouse',
+  'mouse-smooth',
   'noise',
   'ripple',
   'swirl',

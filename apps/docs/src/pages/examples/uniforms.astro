@@ -5,6 +5,7 @@ import LayoutExample from '../../layouts/LayoutExample.astro';
 <LayoutExample name='uniforms'>
   <script>
     import { WGSLCanvas } from '@wgsl-canvas/core';
+    import shaderFragment from '../../shaders/uniforms.wgsl?raw';
 
     async function main() {
       if (!WGSLCanvas.isSupported()) {
@@ -22,33 +23,7 @@ import LayoutExample from '../../layouts/LayoutExample.astro';
       wgslCanvas.uniforms.time = 0.0;
       wgslCanvas.uniforms.color1 = [1.0, 0.0, 0.0];
       wgslCanvas.uniforms.color2 = [0.0, 0.0, 1.0];
-      wgslCanvas.shaderFragment = /* wgsl */`
-        @group(0) @binding(0) var<uniform> uniforms: Uniforms;
-
-        struct Uniforms {
-          time: f32,
-          color1: vec3<f32>,
-          color2: vec3<f32>,
-        }
-
-        struct FragmentInput {
-          @location(0) coord: vec2<f32>,
-        }
-
-        struct FragmentOutput {
-          @location(0) color: vec4<f32>,
-        }
-
-        @fragment
-        fn fragment_main(input: FragmentInput) -> FragmentOutput {
-          var output: FragmentOutput;
-          var uv: vec2<f32> = input.coord * 0.5 + 0.5;
-          var blend: f32 = sin(uniforms.time) * 0.5 + 0.5;
-          var color: vec3<f32> = mix(uniforms.color1, uniforms.color2, blend);
-          output.color = vec4<f32>(color, 1.0);
-          return output;
-        }
-      `;
+      wgslCanvas.shaderFragment = shaderFragment;
 
       const frame: FrameRequestCallback = (timeMs) => {
         const time = timeMs * 0.001;

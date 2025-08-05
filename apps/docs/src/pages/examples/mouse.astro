@@ -2,10 +2,10 @@
 import LayoutExample from '../../layouts/LayoutExample.astro';
 ---
 
-<LayoutExample name='swirl'>
+<LayoutExample name='mouse'>
   <script>
     import { WGSLCanvas } from '@wgsl-canvas/core';
-    import shaderFragment from '../../shaders/swirl.wgsl?raw';
+    import shaderFragment from '../../shaders/mouse.wgsl?raw';
 
     async function main() {
       if (!WGSLCanvas.isSupported()) {
@@ -19,14 +19,18 @@ import LayoutExample from '../../layouts/LayoutExample.astro';
       const wgslCanvas = new WGSLCanvas({ canvas });
       await wgslCanvas.init();
 
-      const textureUrl = "/assets/jade.jpg";
-      const texture = await WGSLCanvas.loadTexture(textureUrl);
-
-      wgslCanvas.uniformsKeys = ["time"];
+      wgslCanvas.uniformsKeys = ["mouse", "time"];
+      wgslCanvas.uniforms.mouse = [0.5, 0.5];
       wgslCanvas.uniforms.time = 0.0;
 
-      wgslCanvas.textures = [texture];
       wgslCanvas.shaderFragment = shaderFragment;
+
+      canvas.addEventListener('pointermove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        wgslCanvas.uniforms.mouse = [x, y];
+      });
 
       const frame: FrameRequestCallback = (timeMs) => {
         const time = timeMs * 0.001;

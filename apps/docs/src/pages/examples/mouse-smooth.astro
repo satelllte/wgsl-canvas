@@ -1,0 +1,69 @@
+---
+import LayoutExample from '../../layouts/LayoutExample.astro';
+---
+
+<LayoutExample name='mouse-smooth'>
+  <script>
+    import { WGSLCanvas } from '@wgsl-canvas/core';
+    import shaderFragment from '../../shaders/mouse.wgsl?raw';
+
+    async function main() {
+      if (!WGSLCanvas.isSupported()) {
+        alert('WebGPU is not supported in this browser.');
+        return;
+      }
+
+      const canvas = document.getElementById('canvas');
+      if (!canvas || !(canvas instanceof HTMLCanvasElement)) return;
+
+      const wgslCanvas = new WGSLCanvas({ canvas });
+      await wgslCanvas.init();
+
+      const mouseTarget: [number, number] = [0.5, 0.5];
+      const mousePointer: [number, number] = [0.5, 0.5];
+
+      wgslCanvas.uniformsKeys = ["mouse", "time"];
+      wgslCanvas.uniforms.mouse = mousePointer;
+      wgslCanvas.uniforms.time = 0.0;
+
+      wgslCanvas.shaderFragment = shaderFragment;
+
+      canvas.addEventListener('pointermove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        mouseTarget[0] = x;
+        mouseTarget[1] = y;
+      });
+
+      const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+      const smoothingSpeed = 5.0;
+
+      let timeDelta = 0.016;
+      let timePrevious = 0.0;
+
+      const frame: FrameRequestCallback = (timeMs) => {
+        const time = timeMs * 0.001;
+
+        timeDelta = time - timePrevious;
+        timePrevious = time;
+
+        // frame-rate independent interpolation factor:
+        // https://www.rorydriscoll.com/2016/03/07/frame-rate-independent-damping-using-lerp/
+        const t = 1.0 - Math.exp(-smoothingSpeed * timeDelta);
+        mousePointer[0] = lerp(mousePointer[0], mouseTarget[0], t);
+        mousePointer[1] = lerp(mousePointer[1], mouseTarget[1], t);
+
+        wgslCanvas.uniforms.mouse = mousePointer;
+        wgslCanvas.uniforms.time = time;
+        wgslCanvas.render();
+
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    }
+
+    void main();
+  </script>
+</LayoutExample>
