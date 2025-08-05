@@ -23,7 +23,7 @@ import LayoutExample from '../../layouts/LayoutExample.astro';
       const mousePointer: [number, number] = [0.5, 0.5];
 
       wgslCanvas.uniformsKeys = ["mouse", "time"];
-      wgslCanvas.uniforms.mouse = mouseTarget;
+      wgslCanvas.uniforms.mouse = mousePointer;
       wgslCanvas.uniforms.time = 0.0;
 
       wgslCanvas.shaderFragment = shaderFragment;
@@ -49,7 +49,9 @@ import LayoutExample from '../../layouts/LayoutExample.astro';
         timeDelta = time - timePrevious;
         timePrevious = time;
 
-        const t = 1.0 - Math.exp(-smoothingSpeed * timeDelta); // frame-rate independent interpolation factor
+        // frame-rate independent interpolation factor:
+        // https://www.rorydriscoll.com/2016/03/07/frame-rate-independent-damping-using-lerp/
+        const t = 1.0 - Math.exp(-smoothingSpeed * timeDelta);
         mousePointer[0] = lerp(mousePointer[0], mouseTarget[0], t);
         mousePointer[1] = lerp(mousePointer[1], mouseTarget[1], t);
 
