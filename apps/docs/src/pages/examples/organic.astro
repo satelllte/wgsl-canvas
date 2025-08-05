@@ -44,8 +44,8 @@ import LayoutExample from '../../layouts/LayoutExample.astro';
           let radius = 0.2 + 0.1 * sin(uniforms.time + uv.x * 4.0 + uv.y * 4.0);
           let dist = distance(uv, center);
           let edge = 0.04 + 0.01 * sin(uniforms.time + uv.x * 12.5 + uv.y * 12.5);
-          let fade = smoothstep(radius - edge, radius, dist);
-          let color = mix(vec3<f32>(0.2), vec3<f32>(0.8), fade);
+          let edgeMask = smoothstep(radius - edge, radius - edge * 0.5, dist) - smoothstep(radius, radius + edge * 0.5, dist);
+          let color = mix(vec3<f32>(0.2), vec3<f32>(0.8), edgeMask);
           output.color = vec4<f32>(color, 1.0);
           return output;
         }
