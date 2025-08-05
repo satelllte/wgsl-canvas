@@ -35,79 +35,9 @@ import LayoutExample from '../../layouts/LayoutExample.astro';
         struct FragmentOutput {
           @location(0) color: vec4<f32>,
         }
-        
-        // utils
-        fn rotate_2d(p: vec2<f32>, a: f32) -> vec2<f32> {
-            let c = cos(a);
-            let s = sin(a);
-            return vec2(p.x * c - p.y * s, p.x * s + p.y * c);
-        }
-
-        // fake 3D value noise
-        fn hash3(p: vec3<f32>) -> f32 {
-            let p3 = fract(p * 0.3183099 + vec3(0.1, 0.2, 0.3));
-            return fract(43758.5453 * dot(p3, vec3(1.0, 57.0, 113.0)));
-        }
-
-        fn noise(p: vec3<f32>) -> f32 {
-            let i = floor(p);
-            let f = fract(p);
-
-            let u = f * f * (3.0 - 2.0 * f);
-
-            return mix(
-                mix(
-                    mix(hash3(i + vec3(0.0, 0.0, 0.0)), hash3(i + vec3(1.0, 0.0, 0.0)), u.x),
-                    mix(hash3(i + vec3(0.0, 1.0, 0.0)), hash3(i + vec3(1.0, 1.0, 0.0)), u.x),
-                    u.y
-                ),
-                mix(
-                    mix(hash3(i + vec3(0.0, 0.0, 1.0)), hash3(i + vec3(1.0, 0.0, 1.0)), u.x),
-                    mix(hash3(i + vec3(0.0, 1.0, 1.0)), hash3(i + vec3(1.0, 1.0, 1.0)), u.x),
-                    u.y
-                ),
-                u.z
-            );
-        }
-
-        // bent sphere distance field
-        fn sphereSDF(p: vec3<f32>) -> f32 {
-            // bend position using noise
-            let n = noise(p * 2.0);
-            let offset = vec3(0.0, n * 0.2, 0.0);
-            return length(p + offset) - 1.0;
-        }
-
-        fn getNormal(p: vec3<f32>) -> vec3<f32> {
-            let eps = 0.001;
-            let d = sphereSDF(p);
-            let n = vec3(
-                sphereSDF(p + vec3(eps, 0.0, 0.0)) - d,
-                sphereSDF(p + vec3(0.0, eps, 0.0)) - d,
-                sphereSDF(p + vec3(0.0, 0.0, eps)) - d
-            );
-            return normalize(n);
-        }
-
-        // raymarcher
-        fn raymarch(ro: vec3<f32>, rd: vec3<f32>) -> f32 {
-            var t = 0.0;
-            for (var i = 0; i < 100; i++) {
-                let p = ro + rd * t;
-                let d = sphereSDF(p);
-                if (d < 0.001) {
-                    return t;
-                }
-                t += d;
-                if (t > 10.0) {
-                    break;
-                }
-            }
-            return -1.0;
-        }
 
         @fragment
-        fn fragment_main(input: FragmentInput) -> @location(0) vec4<f32> {
+        fn fragment_main(input: FragmentInput) -> FragmentOutput {
           var output: FragmentOutput;
           let uv: vec2<f32> = input.coord * 0.5 + 0.5;
           let center = vec2<f32>(0.5, 0.5);
@@ -116,7 +46,8 @@ import LayoutExample from '../../layouts/LayoutExample.astro';
           let edge = 0.04 + 0.01 * sin(uniforms.time + uv.x * 12.5 + uv.y * 12.5);
           let fade = smoothstep(radius - edge, radius, dist);
           let color = mix(vec3<f32>(0.2), vec3<f32>(0.8), fade);
-          return vec4<f32>(color, 1.0);
+          output.color = vec4<f32>(color, 1.0);
+          return output;
         }
       `;
 
