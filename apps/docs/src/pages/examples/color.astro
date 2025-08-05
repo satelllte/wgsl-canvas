@@ -5,6 +5,7 @@ import LayoutExample from '../../layouts/LayoutExample.astro';
 <LayoutExample name='color'>
   <script>
     import { WGSLCanvas } from '@wgsl-canvas/core';
+    import shaderFragment from '../../shaders/color.wgsl?raw';
 
     async function main() {
       if (!WGSLCanvas.isSupported()) {
@@ -18,18 +19,7 @@ import LayoutExample from '../../layouts/LayoutExample.astro';
       const wgslCanvas = new WGSLCanvas({ canvas });
       await wgslCanvas.init();
 
-      wgslCanvas.shaderFragment = /* wgsl */`
-        struct FragmentOutput {
-          @location(0) color: vec4<f32>,
-        }
-
-        @fragment
-        fn fragment_main() -> FragmentOutput {
-          var output: FragmentOutput;
-          output.color = vec4<f32>(0.1, 0.2, 0.25, 1.0);
-          return output;
-        }
-      `;
+      wgslCanvas.shaderFragment = shaderFragment;
 
       wgslCanvas.render();
     }
