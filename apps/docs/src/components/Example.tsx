@@ -6,6 +6,7 @@ const examples = [
   'default',
   'grayscale',
   'noise',
+  'organic',
   'ripple',
   'swirl',
   'texture',
