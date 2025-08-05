@@ -6,6 +6,7 @@ const examples = [
   'default',
   'grayscale',
   'mouse',
+  'mouse-smooth',
   'noise',
   'ripple',
   'swirl',

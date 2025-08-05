@@ -1,0 +1,96 @@
+---
+import LayoutExample from '../../layouts/LayoutExample.astro';
+---
+
+<LayoutExample name='mouse-smooth'>
+  <script>
+    import { WGSLCanvas } from '@wgsl-canvas/core';
+
+    async function main() {
+      if (!WGSLCanvas.isSupported()) {
+        alert('WebGPU is not supported in this browser.');
+        return;
+      }
+
+      const canvas = document.getElementById('canvas');
+      if (!canvas || !(canvas instanceof HTMLCanvasElement)) return;
+
+      const wgslCanvas = new WGSLCanvas({ canvas });
+      await wgslCanvas.init();
+
+      const mouseTarget: [number, number] = [0.5, 0.5];
+      const mousePointer: [number, number] = [0.5, 0.5];
+
+      wgslCanvas.uniformsKeys = ["mouse", "time"];
+      wgslCanvas.uniforms.mouse = mouseTarget;
+      wgslCanvas.uniforms.time = 0.0;
+
+      wgslCanvas.shaderFragment = /* wgsl */`
+        @group(0) @binding(0) var<uniform> uniforms: Uniforms;
+
+        struct Uniforms {
+          mouse: vec2<f32>,
+          time: f32,
+        }
+
+        struct FragmentInput {
+          @location(0) coord: vec2<f32>,
+        }
+
+        struct FragmentOutput {
+          @location(0) color: vec4<f32>,
+        }
+
+        @fragment
+        fn fragment_main(input: FragmentInput) -> FragmentOutput {
+          var output: FragmentOutput;
+          let uv: vec2<f32> = input.coord * 0.5 + 0.5;
+          let center = vec2<f32>(uniforms.mouse.x, 1.0 - uniforms.mouse.y);
+          let radius = 0.2 + 0.1 * sin(uniforms.time + uv.x * 4.0 + uv.y * 4.0);
+          let dist_blob = distance(uv, center);
+          let dist_mouse = distance(vec2<f32>(0.5), vec2<f32>(uniforms.mouse.x, 1.0 - uniforms.mouse.y));
+          let edge = 0.04 + dist_mouse * 0.5 + 0.01 * sin(uniforms.time + uv.x * 12.5 + uv.y * 12.5);
+          let edgeMask = smoothstep(radius - edge, radius - edge * 0.5, dist_blob) - smoothstep(radius, radius + edge * 0.5, dist_blob);
+          let color = mix(vec3<f32>(0.2), vec3<f32>(0.8), edgeMask);
+          output.color = vec4<f32>(color, 1.0);
+          return output;
+        }
+      `;
+
+      canvas.addEventListener('pointermove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        mouseTarget[0] = x;
+        mouseTarget[1] = y;
+      });
+
+      const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+      const smoothingSpeed = 5.0;
+
+      let timeDelta = 0.016;
+      let timePrevious = 0.0;
+
+      const frame: FrameRequestCallback = (timeMs) => {
+        const time = timeMs * 0.001;
+
+        timeDelta = time - timePrevious;
+        timePrevious = time;
+
+        const t = 1.0 - Math.exp(-smoothingSpeed * timeDelta); // frame-rate independent interpolation factor
+        mousePointer[0] = lerp(mousePointer[0], mouseTarget[0], t);
+        mousePointer[1] = lerp(mousePointer[1], mouseTarget[1], t);
+
+        wgslCanvas.uniforms.mouse = mousePointer;
+        wgslCanvas.uniforms.time = time;
+        wgslCanvas.render();
+
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    }
+
+    void main();
+  </script>
+</LayoutExample>
